@@ -1,0 +1,30 @@
+#define ON 1
+#define OFF 0
+
+task main()
+{
+
+
+SetSensor(SENSOR_1,SENSOR_TOUCH);
+int motorState = OFF;
+
+while(1)
+{
+if (SENSOR_1==1)
+{
+ if(motorState==OFF)
+ {
+  OnFwd(OUT_A);
+  motorState = ON;
+ }
+ else
+ {
+  Off(OUT_A);
+  motorState = OFF;
+ }
+ Wait(100);
+}
+}
+
+
+}
