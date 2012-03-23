@@ -1,0 +1,13 @@
+task main()
+{
+
+SetSensor(SENSOR_1,SENSOR_TOUCH);
+
+while(1)
+{
+if (SENSOR_1==1)
+{
+PlayTone (10000, 100);
+}
+}
+}
