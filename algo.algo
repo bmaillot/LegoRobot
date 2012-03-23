@@ -1,0 +1,29 @@
+Start
+
+//Constantes
+duree_demi_tour
+duree_tour = duree_demi_tour * 2
+
+
+Allumer moteur rampe
+Allumer moteurs G+D
+
+//Boucle principale
+	si fin de piste détectée
+		tourner()
+	si levier activé
+		victoire()
+
+function tourner()
+	Allumer moteur G
+	Éteindre moteur D
+	attendre(duree_demi_tour)
+	Allumer moteur D
+
+function victoire()
+	Allumer moteur G
+	Éteindre moteur D
+	attendre(duree_tour)
+	Éteindre moteur G
+	jouer musique
+	stop()
