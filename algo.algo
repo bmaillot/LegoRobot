@@ -1,24 +1,27 @@
-Start
-
 //Constantes
 duree_demi_tour
 duree_tour = duree_demi_tour * 2
 
+function main()
+	//Initialisation
+	Allumer moteur rampe
+	Allumer moteurs G+D
 
-Allumer moteur rampe
-Allumer moteurs G+D
-
-//Boucle principale
-	si fin de piste détectée
-		tourner()
-	si levier activé
-		victoire()
+	//Boucle principale
+	répéter à l'infini
+		si fin de piste détectée
+			tourner()
+		si levier activé
+			victoire()
+	fin répéter
+fin main
 
 function tourner()
 	Allumer moteur G
 	Éteindre moteur D
 	attendre(duree_demi_tour)
 	Allumer moteur D
+fin tourner
 
 function victoire()
 	Allumer moteur G
@@ -27,3 +30,4 @@ function victoire()
 	Éteindre moteur G
 	jouer musique
 	stop()
+fin victoire
