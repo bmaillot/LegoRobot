@@ -1,10 +1,11 @@
 #define ON 1
 #define OFF 0
 
+#define AVANCEMENT_ENCOMBREMENT 50
 #define DUREE_DEMI_TOUR 100
-#define DUREE_TOUR 00
+#define DUREE_TOUR 500
 
-#define VALEUR_PISTE 700
+#define VALEUR_PISTE 760
 #define VALEUR_BALLE 800
 
 task main()
@@ -31,6 +32,8 @@ task main()
  {
   if(SENSOR_1 > VALEUR_PISTE)
   {
+   Wait(AVANCEMENT_ENCOMBREMENT);
+   PlaySound(SOUND_CLICK);
    //Sortie de piste : rotation
    OnRev(OUT_A);
    Wait(DUREE_DEMI_TOUR);
@@ -39,9 +42,10 @@ task main()
   
   if(SENSOR_2 < VALEUR_BALLE)
   {
+   PlaySound(SOUND_DOUBLE_BEEP);
    OnRev(OUT_A);
    Wait(DUREE_TOUR);
-   Off(OUT_A+OUT_C);
+   Off(OUT_A+OUT_B+OUT_C);
    PlaySound(SOUND_DOUBLE_BEEP);
    Wait(1000);
    break;
