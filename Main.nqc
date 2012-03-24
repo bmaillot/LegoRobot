@@ -1,0 +1,51 @@
+#define ON 1
+#define OFF 0
+
+#define DUREE_DEMI_TOUR 100
+#define DUREE_TOUR 00
+
+#define VALEUR_PISTE 700
+#define VALEUR_BALLE 800
+
+task main()
+{
+// int left_motor = OUT_A;
+// int right_motor = OUT_C;
+// int rail_motor = OUT_B;
+
+
+ // initialisation des capteurs
+ SetSensorType(SENSOR_1, SENSOR_TYPE_LIGHT);
+ SetSensorMode(SENSOR_1, SENSOR_MODE_RAW);
+ SetSensorType(SENSOR_2, SENSOR_TYPE_LIGHT);
+ SetSensorMode(SENSOR_2, SENSOR_MODE_RAW);
+ SetSensor(SENSOR_3,SENSOR_TOUCH);
+
+ // Allumage de la rampe
+ OnFwd(OUT_B);
+ 
+ // Allumage des roues
+ OnFwd(OUT_A+OUT_C);
+
+ while(1)
+ {
+  if(SENSOR_1 > VALEUR_PISTE)
+  {
+   //Sortie de piste : rotation
+   OnRev(OUT_A);
+   Wait(DUREE_DEMI_TOUR);
+   OnFwd(OUT_A);
+  }
+  
+  if(SENSOR_2 < VALEUR_BALLE)
+  {
+   OnRev(OUT_A);
+   Wait(DUREE_TOUR);
+   Off(OUT_A+OUT_C);
+   PlaySound(SOUND_DOUBLE_BEEP);
+   Wait(1000);
+   break;
+  }
+ }
+
+}
