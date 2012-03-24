@@ -1,0 +1,30 @@
+#define Pointi 669
+#define Point1 710
+#define Pointf 770
+#define n 500
+
+
+task main()
+{
+
+SetSensorType(SENSOR_2, SENSOR_TYPE_LIGHT);
+SetSensorMode(SENSOR_2, SENSOR_MODE_RAW);
+SetPower(OUT_A,OUT_LOW);
+CreateDatalog(n);
+
+while(1)
+{
+AddToDatalog(SENSOR_2);
+if(SENSOR_2>Point1)
+{
+OnFwd(OUT_A);
+
+}
+
+if(SENSOR_2<Point1)
+{
+OnRev(OUT_A);
+}
+
+}
+}

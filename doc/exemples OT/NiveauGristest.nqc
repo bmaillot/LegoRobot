@@ -1,0 +1,88 @@
+#define Pointi 649
+
+#define Pointf 767
+#define n 1000
+
+int posi;
+int Point1;
+int commande;
+int erreur;
+
+task main()
+{
+
+SetSensorType(SENSOR_2, SENSOR_TYPE_LIGHT);
+SetSensorMode(SENSOR_2, SENSOR_MODE_RAW);
+CreateDatalog(n);
+
+
+Point1=SENSOR_2;
+posi=Point1;
+Wait(200);
+start Dat;
+start vitesse;
+start position;
+
+
+posi=Point1+40;
+Wait(400);
+posi=Point1+20;
+Wait(400);
+
+stop Dat;
+stop vitesse;
+stop position;
+Off(OUT_A+OUT_C);
+
+}
+
+
+
+
+task vitesse()
+{
+while(1)
+{
+erreur=abs(SENSOR_2-posi);
+commande=erreur/10;
+SetPower(OUT_A+OUT_C,commande);
+}
+}
+
+
+
+
+
+task position()
+{
+while(1)
+{
+
+if(SENSOR_2>posi)
+{
+OnFwd(OUT_A);
+OnRev(OUT_C);
+}
+
+if(SENSOR_2<posi)
+{
+OnRev(OUT_A);
+OnFwd(OUT_C);
+}
+
+}
+}
+
+
+
+task Dat()
+{
+while(1)
+{
+AddToDatalog(commande*10+600);
+AddToDatalog(posi);
+AddToDatalog(SENSOR_2);
+Wait(3);
+}
+}
+

@@ -4,8 +4,8 @@
 #define DUREE_DEMI_TOUR 90
 #define DUREE_TOUR 500
 
-#define VALEUR_PISTE 760
-#define VALEUR_BALLE 755
+#define VALEUR_PISTE 730
+#define VALEUR_BALLE 785
 
 // music
 #define toneDuration 18

@@ -1,0 +1,25 @@
+task main()
+{
+SetSensor (SENSOR_2, SENSOR_LIGHT);
+SetSensor(SENSOR_1,SENSOR_TOUCH);
+while(1)
+{
+DISPLAY_SENSOR_2;
+if (SENSOR_1==1)
+{
+OnFwd(OUT_A);
+PlayTone (10000, 100);
+
+
+
+}
+else if(SENSOR_2>50)
+{
+OnFwd(OUT_C);
+}
+else
+{
+Off(OUT_A+OUT_C);
+}
+}
+}

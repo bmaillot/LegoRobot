@@ -1,0 +1,75 @@
+#define SensMax 40
+
+
+
+task roue_droite()
+{
+while (1)
+{
+      if (SENSOR_3==1)
+      {
+      OnRev(OUT_C);
+      }
+      else
+      {
+      Off(OUT_C);
+      }
+}
+}
+
+
+task roue_gauche()
+{
+while (1)
+{
+      if (SENSOR_1==1)
+      {
+      OnRev(OUT_A);
+      }
+      else
+      {
+      Off(OUT_A);
+      }
+      }
+}
+
+task arret()
+{
+while (1)
+{
+      if (SENSOR_2>SensMax)
+      {
+      stop roue_gauche;
+      stop roue_droite;
+      Wait(10);
+      OnFwd(OUT_A+OUT_C);
+      Wait(20);
+               if (Random(1)==1)
+               {
+               OnRev(OUT_A);
+               }
+               else
+               {
+               OnRev(OUT_C);
+               }
+      Wait(20);
+      Off(OUT_A+OUT_C);
+      start roue_gauche;
+      start roue_droite;
+      }
+}
+}
+
+
+
+task main()
+{
+SetSensor(SENSOR_2, SENSOR_LIGHT);
+SetSensor(SENSOR_1,SENSOR_TOUCH);
+SetSensor(SENSOR_3,SENSOR_TOUCH);
+
+start roue_droite;
+start roue_gauche;
+start arret;
+
+}
