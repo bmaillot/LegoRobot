@@ -32,6 +32,7 @@ task main()
  {
   if(SENSOR_1 > VALEUR_PISTE)
   {
+   //Présence de la ligne : quart de tour
    Wait(AVANCEMENT_ENCOMBREMENT);
    PlaySound(SOUND_CLICK);
    //Sortie de piste : rotation
@@ -42,12 +43,20 @@ task main()
   
   if(SENSOR_2 < VALEUR_BALLE)
   {
+   //Victoire !
    PlaySound(SOUND_DOUBLE_BEEP);
+   
+   //Attendre l'expulsion du dernier tube
+   Off(OUT_A+OUT_B);
+   Wait(500);
+   
+   //360° + victory tune
+   OnFwd(OUT_B);
    OnRev(OUT_A);
    Wait(DUREE_TOUR);
    Off(OUT_A+OUT_B+OUT_C);
    PlaySound(SOUND_DOUBLE_BEEP);
-   Wait(1000);
+   Wait(50);
    break;
   }
  }
