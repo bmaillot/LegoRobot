@@ -1,0 +1,18 @@
+// music
+#define toneDuration 18
+#define blankDuration 24
+#define CS 494
+
+task main()
+{
+ PlayTone(CS, toneDuration); Wait(blankDuration);
+ PlayTone(CS, toneDuration); Wait(blankDuration);
+ PlayTone(CS, toneDuration); Wait(blankDuration);
+ PlayTone(CS, toneDuration); Wait(blankDuration);
+
+ PlayTone(415, toneDuration); Wait(blankDuration);
+ PlayTone(440, toneDuration); Wait(blankDuration);
+ PlayTone(CS, toneDuration); Wait(blankDuration);
+ PlayTone(440, toneDuration); Wait(blankDuration);
+ PlayTone(CS, toneDuration); Wait(blankDuration);
+}

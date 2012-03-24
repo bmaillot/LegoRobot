@@ -8,8 +8,8 @@
 #define VALEUR_BALLE 755
 
 // music
-#define toneDuration 30
-#define blankDuration 15
+#define toneDuration 18
+#define blankDuration 24
 #define CS 494
 
 void music()
@@ -54,17 +54,13 @@ task main()
   {
    //Présence de la ligne : quart de tour
    PlaySound(SOUND_CLICK);
-   for(i = 0; i < 6; i++)
-   {
-    OnFwd(OUT_A);
-    Wait(DUREE_DEMI_TOUR / 5);
-    OnFwd(OUT_C);
-    Wait(DUREE_DEMI_TOUR / 10);
-    OnRev(OUT_C);
-   }
-   OnRev(OUT_A);
+   OnFwd(OUT_A+OUT_C);
+   Wait(DUREE_DEMI_TOUR / 2);
+   OnRev(OUT_C);
+   Wait(DUREE_DEMI_TOUR);
+   OnRev(OUT_A+OUT_C);
   }
-  
+
   if(SENSOR_3 < VALEUR_BALLE)
   {
    //Victoire !
@@ -72,7 +68,7 @@ task main()
    
    //Attendre l'expulsion du dernier tube
    Off(OUT_A+OUT_C);
-   Wait(300);
+   Wait(200);
    
    //360° + victory tune
    OnRev(OUT_C);
