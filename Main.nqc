@@ -1,61 +1,86 @@
 #define ON 1
 #define OFF 0
 
-#define AVANCEMENT_ENCOMBREMENT 50
-#define DUREE_DEMI_TOUR 100
+#define DUREE_DEMI_TOUR 90
 #define DUREE_TOUR 500
 
 #define VALEUR_PISTE 760
-#define VALEUR_BALLE 800
+#define VALEUR_BALLE 755
+
+// music
+#define toneDuration 30
+#define blankDuration 15
+#define CS 494
+
+void music()
+{
+ PlayTone(CS, toneDuration); Wait(blankDuration);
+ PlayTone(CS, toneDuration); Wait(blankDuration);
+ PlayTone(CS, toneDuration); Wait(blankDuration);
+ PlayTone(CS, toneDuration); Wait(blankDuration);
+
+ PlayTone(415, toneDuration); Wait(blankDuration);
+ PlayTone(440, toneDuration); Wait(blankDuration);
+ PlayTone(CS, toneDuration); Wait(blankDuration);
+ PlayTone(440, toneDuration); Wait(blankDuration);
+ PlayTone(CS, toneDuration); Wait(blankDuration);
+}
 
 task main()
 {
 // int left_motor = OUT_A;
-// int right_motor = OUT_B;
-// int rail_motor = OUT_C;
+// int right_motor = OUT_C;
+// int rail_motor = OUT_B;
+ int i;
 
 
  // initialisation des capteurs
+    // piste
  SetSensorType(SENSOR_1, SENSOR_TYPE_LIGHT);
  SetSensorMode(SENSOR_1, SENSOR_MODE_RAW);
- SetSensorType(SENSOR_2, SENSOR_TYPE_LIGHT);
- SetSensorMode(SENSOR_2, SENSOR_MODE_RAW);
- SetSensor(SENSOR_3,SENSOR_TOUCH);
+   // balle
+ SetSensorType(SENSOR_3, SENSOR_TYPE_LIGHT);
+ SetSensorMode(SENSOR_3, SENSOR_MODE_RAW);
 
  // Allumage de la rampe
- OnRev(OUT_C);
+ OnFwd(OUT_B);
  
  // Allumage des roues
- OnFwd(OUT_A+OUT_B);
+ OnRev(OUT_A+OUT_C);
 
  while(1)
  {
   if(SENSOR_1 > VALEUR_PISTE)
   {
    //Présence de la ligne : quart de tour
-   Wait(AVANCEMENT_ENCOMBREMENT);
    PlaySound(SOUND_CLICK);
-   //Sortie de piste : rotation
+   for(i = 0; i < 6; i++)
+   {
+    OnFwd(OUT_A);
+    Wait(DUREE_DEMI_TOUR / 5);
+    OnFwd(OUT_C);
+    Wait(DUREE_DEMI_TOUR / 10);
+    OnRev(OUT_C);
+   }
    OnRev(OUT_A);
-   Wait(DUREE_DEMI_TOUR);
-   OnFwd(OUT_A);
   }
   
-  if(SENSOR_2 < VALEUR_BALLE)
+  if(SENSOR_3 < VALEUR_BALLE)
   {
    //Victoire !
    PlaySound(SOUND_DOUBLE_BEEP);
    
    //Attendre l'expulsion du dernier tube
-   Off(OUT_A+OUT_B);
-   Wait(500);
+   Off(OUT_A+OUT_C);
+   Wait(300);
    
    //360° + victory tune
-   OnFwd(OUT_B);
-   OnRev(OUT_A);
+   OnRev(OUT_C);
+   OnFwd(OUT_A);
    Wait(DUREE_TOUR);
    Off(OUT_A+OUT_B+OUT_C);
-   PlaySound(SOUND_DOUBLE_BEEP);
+   //PlaySound(SOUND_DOUBLE_BEEP);
+   music();
    Wait(50);
    break;
   }
