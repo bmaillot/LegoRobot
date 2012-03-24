@@ -11,8 +11,8 @@
 task main()
 {
 // int left_motor = OUT_A;
-// int right_motor = OUT_C;
-// int rail_motor = OUT_B;
+// int right_motor = OUT_B;
+// int rail_motor = OUT_C;
 
 
  // initialisation des capteurs
@@ -23,10 +23,10 @@ task main()
  SetSensor(SENSOR_3,SENSOR_TOUCH);
 
  // Allumage de la rampe
- OnFwd(OUT_B);
+ OnRev(OUT_C);
  
  // Allumage des roues
- OnFwd(OUT_A+OUT_C);
+ OnFwd(OUT_A+OUT_B);
 
  while(1)
  {
