@@ -14,4 +14,4 @@ Règles
 
 Concours
 ------
-Vidéo sur Youtube : http://www.youtube.com/embed/jeLveFc5f4U
+Vidéo sur Youtube : http://youtu.be/jeLveFc5f4U
