@@ -4,15 +4,17 @@ Lego Challenge
 Présentation
 ------------
 
-Projet réalisé dans le cadre du challenge Lego GMD : 24 heures pour la réalisation d'un robot Mindstorms RCX1.
+Projet réalisé dans le cadre du challenge Lego GMD : 24 heures pour la réalisation d'un robot Mindstorms RCX2.
 
-Chaque boîte contenait en plus des briques de Lego standards 1 brique programmable, 3 moteurs, 2 capteurs de lumière et 2 capteurs de pression. Sur le plateau, on pouvait retrouver 5 tubes (1 avec balle, 4 vides) ainsi qu'une ligne noire pour marquer la limite du terrain.
+Chaque boîte contenait en plus des briques de Lego standards 1 brique programmable, 3 moteurs, 2 capteurs de lumière et 2 capteurs de pression.
 
-Règles
-------
-> This year's task is to find a ping-pong ball inside a plastic cylinder! Inside the playground, five plastic cylinders are grouped. Four of the cylinders are empty, the robots has to find the cylinder with the ball and extract the ball.
-> The robot has to seize only the ball (not the tube), make a 360 degree turn and play a tune.
+Installation
+------------
 
-Concours
-------
-Vidéo sur Youtube : http://youtu.be/jeLveFc5f4U
+Le logiciel utilisé (Brixcc) est pourri jusqu'à la moëlle et ne fonctionnera pas sous machines 64 bits. Pas plus de réussite avec des machines virtuelles 32 bits...
+
+La meilleure solution est d'utiliser ce tuto pour coder en bas niveau sous Linux tel que décrit sur http://techmalt.com/?p=268.
+
+Ensuite, on installe le firmware `nqc -firmware firm0328.lgo` (c'est long)
+
+Puis on code son fichier NQC que l'on envoie avec `nqc -d src.nqc`.

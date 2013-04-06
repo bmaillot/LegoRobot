@@ -1,0 +1,38 @@
+#define ON 1
+#define OFF 0
+
+#define DUREE_DEMI_TOUR 90
+#define DUREE_TOUR 500
+
+#define VALEUR_PISTE 730
+#define VALEUR_BALLE 785
+
+// music
+#define toneDuration 18
+#define blankDuration 24
+#define CS 494
+
+void music()
+{
+	PlayTone(CS, toneDuration); Wait(blankDuration);
+	PlayTone(CS, toneDuration); Wait(blankDuration);
+	PlayTone(CS, toneDuration); Wait(blankDuration);
+	PlayTone(CS, toneDuration); Wait(blankDuration);
+
+	PlayTone(415, toneDuration); Wait(blankDuration);
+	PlayTone(440, toneDuration); Wait(blankDuration);
+	PlayTone(CS, toneDuration); Wait(blankDuration);
+	PlayTone(440, toneDuration); Wait(blankDuration);
+	PlayTone(CS, toneDuration); Wait(blankDuration);
+}
+
+task main()
+{
+// int pince_motor = OUT_A;
+// int right_motor = OUT_C;
+// int rotation_motor = OUT_B;
+
+
+	// Allumage de la pince
+	OnFwd(OUT_A);
+}
