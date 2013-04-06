@@ -1,11 +1,10 @@
 #define ON 1
 #define OFF 0
 
-#define DUREE_DEMI_TOUR 90
 #define DUREE_TOUR 500
 
-#define VALEUR_PISTE 730
-#define VALEUR_BALLE 785
+#define VALEUR_FINCOURSE_PINCE 730
+#define VALEUR_FINCOURSE_CHARIOT 785
 
 // music
 #define toneDuration 18
@@ -28,11 +27,36 @@ void music()
 
 task main()
 {
-// int pince_motor = OUT_A;
-// int right_motor = OUT_C;
-// int rotation_motor = OUT_B;
 
+// ## CONFIG
+	// int pince_motor = OUT_A;
+	// int right_motor = OUT_C;
+	// int rotation_motor = OUT_B;
+	SetSensorType(SENSOR_1, SENSOR_TYPE_LIGHT);
+	SetSensorMode(SENSOR_1, SENSOR_MODE_RAW);
 
-	// Allumage de la pince
+	// 1 : Fermeture de la pince
 	OnFwd(OUT_A);
+
+	while(SENSOR_1 < VALEUR_FINCOURSE_PINCE) { }
+
+	Off(OUT_A);
+
+	// 2 : rapprocher les balles de tennis vers le socle
+	OnFwd(OUT_B);
+
+	while(SENSOR_2 < VALEUR_FINCOURSE_CHARIOT) { }
+
+	Off(OUT_B);
+
+	// 3 : 360°
+
+	OnFwd(OUT_C);
+
+	Wait(DUREE_TOUR);
+
+	Off(OUT_A + OUT_B + OUT_C);
+
+	music();
+	Wait(50);
 }
