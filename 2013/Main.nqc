@@ -1,10 +1,10 @@
 #define ON 1
 #define OFF 0
 
-#define DUREE_TOUR 500
+#define DUREE_TOUR 1500
 
-#define VALEUR_FINCOURSE_PINCE 730
-#define VALEUR_FINCOURSE_CHARIOT 785
+#define VALEUR_FINCOURSE_PINCE 980
+#define VALEUR_FINCOURSE_CHARIOT 500
 
 // music
 #define toneDuration 18
@@ -32,20 +32,33 @@ task main()
 	// int pince_motor = OUT_A;
 	// int right_motor = OUT_C;
 	// int rotation_motor = OUT_B;
-	SetSensorType(SENSOR_1, SENSOR_TYPE_LIGHT);
-	SetSensorMode(SENSOR_1, SENSOR_MODE_RAW);
+	SetSensor(SENSOR_3, SENSOR_TYPE_TOUCH);
+	SetSensorMode(SENSOR_3, SENSOR_MODE_RAW);
+	SetSensor(SENSOR_2, SENSOR_TYPE_TOUCH);
+	SetSensorMode(SENSOR_2, SENSOR_MODE_RAW);
 
 	// 1 : Fermeture de la pince
 	OnFwd(OUT_A);
 
-	while(SENSOR_1 < VALEUR_FINCOURSE_PINCE) { }
+	SelectDisplay(DISPLAY_SENSOR_3);
+
+	// Détection fin de course
+	while(SENSOR_3 > VALEUR_FINCOURSE_PINCE) {
+	}
 
 	Off(OUT_A);
 
 	// 2 : rapprocher les balles de tennis vers le socle
+	//SetPower(OUT_A, 2);
 	OnFwd(OUT_B);
 
-	while(SENSOR_2 < VALEUR_FINCOURSE_CHARIOT) { }
+	ClearTimer(0);
+	while(SENSOR_2 > VALEUR_FINCOURSE_CHARIOT) {
+		 if(Timer(0) > 45)
+		 {
+			break;
+		 }
+	}
 
 	Off(OUT_B);
 

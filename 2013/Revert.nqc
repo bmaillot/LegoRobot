@@ -1,0 +1,21 @@
+task main()
+{
+	SetSensor(SENSOR_2, SENSOR_TYPE_TOUCH);
+	SetSensorMode(SENSOR_2, SENSOR_MODE_RAW);<
+
+	
+	// 1 : Fermeture de la pince
+	OnRev(OUT_A);
+
+	// First detection
+	while(1) {
+		if(SENSOR_2 < 500)
+		{
+			OnRev(OUT_B);
+			Wait(5);
+			Off(OUT_B);
+		}
+	}
+
+	Off(OUT_A);
+}
